@@ -19,14 +19,14 @@ void initGamma() {
 
 }  // namespace
 
-HD108::HD108(uint16_t numLeds, int8_t dataPin, int8_t clockPin, uint32_t spiHz,
+HD108Strip::HD108Strip(uint16_t numLeds, int8_t dataPin, int8_t clockPin, uint32_t spiHz,
              SPIClass& spi)
     : n_(numLeds), dataPin_(dataPin), clockPin_(clockPin), hz_(spiHz),
       spi_(&spi) {}
 
-HD108::~HD108() { end(); }
+HD108Strip::~HD108Strip() { end(); }
 
-bool HD108::begin() {
+bool HD108Strip::begin() {
   if (begun_) return true;
   initGamma();
   // >= 64 one bits, plus one extra clock edge per two LEDs (each HD108 delays
@@ -43,7 +43,7 @@ bool HD108::begin() {
   return true;
 }
 
-void HD108::end() {
+void HD108Strip::end() {
   if (!begun_) return;
   spi_->end();
   free(buf_);
@@ -51,7 +51,7 @@ void HD108::end() {
   begun_ = false;
 }
 
-void HD108::setColorOrder(ColorOrder order) {
+void HD108Strip::setColorOrder(ColorOrder order) {
   switch (order) {
     case ColorOrder::BGR: slotB_ = 0; slotG_ = 1; slotR_ = 2; break;
     case ColorOrder::RGB: slotR_ = 0; slotG_ = 1; slotB_ = 2; break;
@@ -62,7 +62,7 @@ void HD108::setColorOrder(ColorOrder order) {
   }
 }
 
-void HD108::writeHeader(uint16_t phys, uint8_t gain) {
+void HD108Strip::writeHeader(uint16_t phys, uint8_t gain) {
   const uint16_t g5 = gain & 0x1F;
   const uint16_t hdr = 0x8000 | (g5 << 10) | (g5 << 5) | g5;
   uint8_t* p = buf_ + kStartBytes + (size_t)phys * kFrameBytes;
@@ -70,18 +70,18 @@ void HD108::writeHeader(uint16_t phys, uint8_t gain) {
   p[1] = hdr & 0xFF;
 }
 
-void HD108::setGlobalGain(uint8_t gain) {
+void HD108Strip::setGlobalGain(uint8_t gain) {
   gain_ = gain > 31 ? 31 : gain;
   if (buf_ == nullptr) return;
   for (uint16_t i = 0; i < n_; ++i) writeHeader(i, gain_);
 }
 
-void HD108::setPixelGain(uint16_t i, uint8_t gain) {
+void HD108Strip::setPixelGain(uint16_t i, uint8_t gain) {
   if (i >= n_ || buf_ == nullptr) return;
   writeHeader(phys(i), gain > 31 ? 31 : gain);
 }
 
-void HD108::setPixel(uint16_t i, uint16_t r, uint16_t g, uint16_t b) {
+void HD108Strip::setPixel(uint16_t i, uint16_t r, uint16_t g, uint16_t b) {
   if (i >= n_ || buf_ == nullptr) return;
   uint8_t* p = buf_ + kStartBytes + (size_t)phys(i) * kFrameBytes + 2;
   p[slotR_ * 2] = r >> 8;
@@ -92,11 +92,11 @@ void HD108::setPixel(uint16_t i, uint16_t r, uint16_t g, uint16_t b) {
   p[slotB_ * 2 + 1] = b & 0xFF;
 }
 
-void HD108::setPixel8(uint16_t i, uint8_t r, uint8_t g, uint8_t b) {
+void HD108Strip::setPixel8(uint16_t i, uint8_t r, uint8_t g, uint8_t b) {
   setPixel(i, gamma16(r), gamma16(g), gamma16(b));
 }
 
-void HD108::getPixel(uint16_t i, uint16_t& r, uint16_t& g, uint16_t& b) const {
+void HD108Strip::getPixel(uint16_t i, uint16_t& r, uint16_t& g, uint16_t& b) const {
   if (i >= n_ || buf_ == nullptr) {
     r = g = b = 0;
     return;
@@ -107,18 +107,18 @@ void HD108::getPixel(uint16_t i, uint16_t& r, uint16_t& g, uint16_t& b) const {
   b = ((uint16_t)p[slotB_ * 2] << 8) | p[slotB_ * 2 + 1];
 }
 
-void HD108::fill(uint16_t r, uint16_t g, uint16_t b) {
+void HD108Strip::fill(uint16_t r, uint16_t g, uint16_t b) {
   for (uint16_t i = 0; i < n_; ++i) setPixel(i, r, g, b);
 }
 
-void HD108::show() {
+void HD108Strip::show() {
   if (!begun_) return;
   spi_->beginTransaction(SPISettings(hz_, MSBFIRST, SPI_MODE0));
   spi_->writeBytes(buf_, len_);
   spi_->endTransaction();
 }
 
-uint16_t HD108::gamma16(uint8_t v) {
+uint16_t HD108Strip::gamma16(uint8_t v) {
   initGamma();
   return s_gamma[v];
 }

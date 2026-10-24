@@ -42,15 +42,15 @@ public:
   }
   uint32_t background() const { return bg_; }
 
-  void begin(HD108& strip) override {
+  void begin(HD108Strip& strip) override {
     Effect::begin(strip);
     reset_ = true;
   }
 
   // update() redraws every pixel each frame.
-  void repaint(HD108&) override {}
+  void repaint(HD108Strip&) override {}
 
-  void update(HD108& strip, uint32_t now) override {
+  void update(HD108Strip& strip, uint32_t now) override {
     if (reset_) {
       reset_ = false;
       for (Tube& t : tubes_) {
@@ -104,9 +104,9 @@ private:
   static constexpr float kBgPeriodS = 3.5f;
 
   static void toLinear(uint32_t rgb, float out[3]) {
-    out[0] = HD108::gamma16((rgb >> 16) & 0xFF);
-    out[1] = HD108::gamma16((rgb >> 8) & 0xFF);
-    out[2] = HD108::gamma16(rgb & 0xFF);
+    out[0] = HD108Strip::gamma16((rgb >> 16) & 0xFF);
+    out[1] = HD108Strip::gamma16((rgb >> 8) & 0xFF);
+    out[2] = HD108Strip::gamma16(rgb & 0xFF);
   }
 
   static void stepTube(Tube& t, uint32_t now) {

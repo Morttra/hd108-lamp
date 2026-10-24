@@ -10,5 +10,5 @@ public:
   const char* name() const override { return "Off"; }
 
   // Effect::begin() clears the strip; nothing to animate.
-  void update(HD108&, uint32_t) override {}
+  void update(HD108Strip&, uint32_t) override {}
 };

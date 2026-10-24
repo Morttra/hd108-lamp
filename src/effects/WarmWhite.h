@@ -12,11 +12,11 @@ class WarmWhite : public Effect {
 public:
   const char* name() const override { return "Warm white"; }
 
-  void begin(HD108& strip) override {
+  void begin(HD108Strip& strip) override {
     for (uint16_t i = 0; i < strip.size(); ++i) {
       strip.setPixel8(i, 255, 147, 41);
     }
   }
 
-  void update(HD108&, uint32_t) override {}
+  void update(HD108Strip&, uint32_t) override {}
 };

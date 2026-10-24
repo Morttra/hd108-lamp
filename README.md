@@ -151,7 +151,7 @@ Create `src/effects/MyEffect.h`:
 class MyEffect : public Effect {
 public:
   const char* name() const override { return "My effect"; }
-  void update(HD108& strip, uint32_t nowMs) override {
+  void update(HD108Strip& strip, uint32_t nowMs) override {
     // strip.setPixel(i, r16, g16, b16) / strip.setPixel8(i, r, g, b)
     // geo::frac(i), geo::xy(i), geo::angle(i) for position-aware effects
   }
@@ -167,12 +167,12 @@ mode is remembered by name, so the list order is free.
 
 ## The HD108 driver
 
-`lib/HD108` is a self-contained ESP32 driver for HD108 strips: 16-bit color
-per channel, per-pixel 5-bit current gain, configurable color order, ring
-rotation and gamma helpers, with one preassembled wire buffer and a single
-SPI transfer per frame. It has no dependency on the rest of this project
-and can be dropped into any PlatformIO or Arduino ESP32 project. Protocol
-details and the API: [lib/HD108/README.md](lib/HD108/README.md).
+`lib/HD108` is the core of the HD108 driver (class `HD108Strip`): 16-bit
+color per channel, per-pixel 5-bit current gain, configurable color order,
+ring rotation and gamma helpers, with one preassembled wire buffer and a
+single SPI transfer per frame. It is a snapshot of the standalone
+**hd108-driver** library, which adds NeoPixel-style and FastLED adapters,
+examples and the protocol documentation; the lamp needs only the core.
 
 ## Repo layout
 

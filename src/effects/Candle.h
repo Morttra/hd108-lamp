@@ -19,7 +19,7 @@ class Candle : public Effect {
 public:
   const char* name() const override { return "Candle"; }
 
-  void begin(HD108& strip) override {
+  void begin(HD108Strip& strip) override {
     Effect::begin(strip);
     for (int j = 0; j < kFlames; ++j) {
       level_[j] = 0.6f;
@@ -29,9 +29,9 @@ public:
   }
 
   // update() redraws every pixel each frame.
-  void repaint(HD108&) override {}
+  void repaint(HD108Strip&) override {}
 
-  void update(HD108& strip, uint32_t now) override {
+  void update(HD108Strip& strip, uint32_t now) override {
     for (int j = 0; j < kFlames; ++j) {
       if ((int32_t)(now - nextPick_[j]) >= 0) {  // wrap-safe deadline
         target_[j] = 0.35f + (float)random(0, 651) / 1000.0f;  // 0.35 .. 1.0

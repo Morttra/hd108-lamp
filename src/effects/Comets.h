@@ -17,7 +17,7 @@ class Comets : public Effect {
 public:
   const char* name() const override { return "Comets"; }
 
-  void update(HD108& strip, uint32_t now) override {
+  void update(HD108Strip& strip, uint32_t now) override {
     const uint16_t n = strip.size();
     const float lapMs = 7000.0f;
     const float tail = n / 7.0f;

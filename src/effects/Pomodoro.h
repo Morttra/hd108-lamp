@@ -21,7 +21,7 @@ class Pomodoro : public Effect {
 public:
   const char* name() const override { return "Pomodoro"; }
 
-  void begin(HD108& strip) override {
+  void begin(HD108Strip& strip) override {
     Effect::begin(strip);
     working_ = true;
     sessions_ = 0;
@@ -30,9 +30,9 @@ public:
   }
 
   // update() redraws every pixel each frame.
-  void repaint(HD108&) override {}
+  void repaint(HD108Strip&) override {}
 
-  void update(HD108& strip, uint32_t now) override {
+  void update(HD108Strip& strip, uint32_t now) override {
     if (restart_) {
       restart_ = false;
       phaseStart_ = now;

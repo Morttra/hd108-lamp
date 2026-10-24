@@ -69,15 +69,15 @@ public:
   }
   uint16_t speed() const { return speed_; }
 
-  void begin(HD108& strip) override {
+  void begin(HD108Strip& strip) override {
     Effect::begin(strip);
     haveLast_ = false;
   }
 
   // update() redraws every pixel each frame.
-  void repaint(HD108&) override {}
+  void repaint(HD108Strip&) override {}
 
-  void update(HD108& strip, uint32_t now) override {
+  void update(HD108Strip& strip, uint32_t now) override {
     // Phase accumulators instead of an absolute clock: now*0.001f in float
     // quantizes with uptime until the drift turns into visible steps.
     if (!haveLast_) {

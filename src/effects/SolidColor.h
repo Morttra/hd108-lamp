@@ -18,14 +18,14 @@ public:
   uint8_t green() const { return g_; }
   uint8_t blue() const { return b_; }
 
-  void begin(HD108& strip) override { apply(strip); }
+  void begin(HD108Strip& strip) override { apply(strip); }
 
-  void update(HD108& strip, uint32_t) override {
+  void update(HD108Strip& strip, uint32_t) override {
     if (dirty_) apply(strip);
   }
 
 private:
-  void apply(HD108& strip) {
+  void apply(HD108Strip& strip) {
     dirty_ = false;
     for (uint16_t i = 0; i < strip.size(); ++i) {
       strip.setPixel8(i, r_, g_, b_);

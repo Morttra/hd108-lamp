@@ -34,15 +34,15 @@ public:
 
   uint32_t minutes() const { return durMs_ / 60000UL; }
 
-  void begin(HD108& strip) override {
+  void begin(HD108Strip& strip) override {
     Effect::begin(strip);
     restart_ = true;
   }
 
   // update() redraws every pixel each frame — don't reset the countdown.
-  void repaint(HD108&) override {}
+  void repaint(HD108Strip&) override {}
 
-  void update(HD108& strip, uint32_t now) override {
+  void update(HD108Strip& strip, uint32_t now) override {
     if (restart_) {
       restart_ = false;
       t0_ = now;

@@ -55,7 +55,7 @@ static const char* kApPassword = "hd108lamp";
 
 // ------------------------------------------------------------------- strip
 
-static HD108 strip(LED_COUNT, PIN_LED_DATA, PIN_LED_CLOCK, LED_SPI_HZ);
+static HD108Strip strip(LED_COUNT, PIN_LED_DATA, PIN_LED_CLOCK, LED_SPI_HZ);
 
 // ----------------------------------------------------------------- effects
 

@@ -14,7 +14,7 @@ class RainbowCycle : public Effect {
 public:
   const char* name() const override { return "Rainbow"; }
 
-  void update(HD108& strip, uint32_t now) override {
+  void update(HD108Strip& strip, uint32_t now) override {
     const uint32_t kPeriodMs = 24000;  // one revolution
     const uint16_t h0 =
         (uint16_t)((uint64_t)(now % kPeriodMs) * 65536 / kPeriodMs);

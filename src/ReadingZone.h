@@ -25,9 +25,9 @@ public:
   static constexpr uint16_t kFeather = 5;
 
   ReadingZone()
-      : linR_(HD108::gamma16(kColor[0])),
-        linG_(HD108::gamma16(kColor[1])),
-        linB_(HD108::gamma16(kColor[2])) {}
+      : linR_(HD108Strip::gamma16(kColor[0])),
+        linG_(HD108Strip::gamma16(kColor[1])),
+        linB_(HD108Strip::gamma16(kColor[2])) {}
 
   bool enabled() const { return enabled_; }
   void setEnabled(bool on) { enabled_ = on; }
@@ -42,7 +42,7 @@ public:
 
   // Paints the arc over the strip's current frame: call after the mode's
   // update() and before show().
-  void apply(HD108& strip) const {
+  void apply(HD108Strip& strip) const {
     const int n = strip.size();
     if (n == 0) return;
     for (int d = -(int)kHalfWidth; d <= (int)kHalfWidth; ++d) {
@@ -59,7 +59,7 @@ public:
 
   // Hands the arc's pixels back: resets every pixel to the global gain. The
   // caller repaints the mode's colors.
-  void release(HD108& strip) const {
+  void release(HD108Strip& strip) const {
     strip.setGlobalGain(strip.globalGain());
   }
 

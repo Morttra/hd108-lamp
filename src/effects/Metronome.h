@@ -29,7 +29,7 @@ public:
   }
   uint16_t bpm() const { return bpm_; }
 
-  void begin(HD108& strip) override {
+  void begin(HD108Strip& strip) override {
     Effect::begin(strip);
     haveLast_ = false;
     barPhase_ = 0.0f;
@@ -45,9 +45,9 @@ public:
   }
 
   // update() redraws every pixel each frame.
-  void repaint(HD108&) override {}
+  void repaint(HD108Strip&) override {}
 
-  void update(HD108& strip, uint32_t now) override {
+  void update(HD108Strip& strip, uint32_t now) override {
     if (!haveLast_) {
       haveLast_ = true;
       lastMs_ = now;

@@ -3,7 +3,8 @@
 #include <SPI.h>
 
 // Driver for HD108 16-bit RGB LEDs (APA102-style two-wire bus: data + clock,
-// driven here with ESP32 hardware SPI).
+// driven here with ESP32 hardware SPI). The class is HD108Strip: the bare
+// name HD108 is FastLED's chipset tag since 3.10, and the two must coexist.
 //
 // Wire format (per the HD108 datasheet):
 //   start frame : 128 zero bits
@@ -24,13 +25,13 @@
 
 enum class ColorOrder : uint8_t { BGR, RGB, GRB, BRG, RBG, GBR };
 
-class HD108 {
+class HD108Strip {
 public:
   // `spi` selects the hardware bus; the default is the global VSPI object.
   // For a second strip on the ESP32, pass an SPIClass(HSPI) instance.
-  HD108(uint16_t numLeds, int8_t dataPin, int8_t clockPin,
+  HD108Strip(uint16_t numLeds, int8_t dataPin, int8_t clockPin,
         uint32_t spiHz = 10000000UL, SPIClass& spi = SPI);
-  ~HD108();
+  ~HD108Strip();
 
   // Allocates the wire buffer and claims the SPI bus. Returns false if the
   // buffer allocation fails.
