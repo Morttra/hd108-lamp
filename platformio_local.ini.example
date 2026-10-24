@@ -1,0 +1,8 @@
+; Copy this file to platformio_local.ini (gitignored) to upload over WiFi
+; after the first USB flash. --auth must match OTA_PASSWORD in
+; include/secrets.h; upload_port can be the mDNS name or the lamp's IP
+; (or pass --upload-port <ip> on the command line).
+[env:lamp]
+upload_protocol = espota
+upload_port = hd108-lamp.local
+upload_flags = --auth=changeme-ota-password

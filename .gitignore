@@ -1,0 +1,10 @@
+# PlatformIO build output and a local Python env with the pio CLI
+.pio/
+.venv/
+# VS Code: keep only the extension recommendations; the rest is generated
+.vscode/*
+!.vscode/extensions.json
+# Credentials and per-machine upload settings
+include/secrets.h
+platformio_local.ini
+.DS_Store

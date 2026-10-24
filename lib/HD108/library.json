@@ -1,0 +1,11 @@
+{
+  "name": "HD108",
+  "version": "1.0.0",
+  "description": "Driver for HD108 16-bit RGB LED strips (APA102-style two-wire protocol) over ESP32 hardware SPI: 16-bit color per channel, per-pixel 5-bit constant-current gain, configurable color order and ring offset, gamma helpers.",
+  "keywords": ["hd108", "led", "rgb", "apa102", "sk9822", "spi", "esp32", "16-bit"],
+  "authors": [{ "name": "Morttra", "maintainer": true }],
+  "license": "MIT",
+  "frameworks": "arduino",
+  "platforms": "espressif32",
+  "headers": "HD108.h"
+}
