@@ -17,6 +17,7 @@
 #include "effects/Aurora.h"
 #include "effects/Breathe.h"
 #include "effects/Candle.h"
+#include "effects/CandyCane.h"
 #include "effects/Comets.h"
 #include "effects/DinnerTimer.h"
 #include "effects/Effect.h"
@@ -70,15 +71,16 @@ static RainbowCycle fxRainbow;
 static Comets fxComets;
 static Race fxRace;
 static Horror fxHorror;
+static CandyCane fxCandyCane;
 static Pomodoro fxPomodoro;
 static Metronome fxMetronome;
 
 // "Off" first (the everyday mode). The active mode is persisted by name, so
 // this list can be reordered freely.
 static Effect* g_effects[] = {
-    &fxOff,    &fxWarmWhite, &fxSolid,  &fxTimer, &fxCandle, &fxBreathe,
-    &fxAurora, &fxRainbow,   &fxComets, &fxRace,  &fxHorror, &fxPomodoro,
-    &fxMetronome,
+    &fxOff,    &fxWarmWhite, &fxSolid,  &fxTimer,  &fxCandle,    &fxBreathe,
+    &fxAurora, &fxRainbow,   &fxComets, &fxRace,   &fxHorror,    &fxCandyCane,
+    &fxPomodoro, &fxMetronome,
 };
 static const size_t kEffectCount = sizeof(g_effects) / sizeof(g_effects[0]);
 

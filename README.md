@@ -8,10 +8,10 @@ lengths in one header and it runs any HD108 loop or strip.
 
 What it does:
 
-- **13 light modes** — warm white, solid color, candle, aurora with
-  palettes and adjustable speed, rainbow, comets, race, a horror-corridor
-  flicker, a 4-7-8 breathing guide, a dinner timer, a pomodoro timer and a
-  4/4 visual metronome.
+- **14 light modes** — warm white, solid color, candle, aurora with
+  palettes and adjustable speed, rainbow, comets, race, candy cane, a
+  horror-corridor flicker, a 4-7-8 breathing guide, a dinner timer, a
+  pomodoro timer and a 4/4 visual metronome.
 - A **reading light**: a warm-white arc you aim anywhere on the lamp, with
   its own brightness, drawn over whatever else is running (or over the lamp
   being off). It uses the HD108's per-pixel current gain, so the room can
@@ -127,6 +127,7 @@ The modes:
 | Comets | Three comets with fading tails |
 | Race | Two comets sprinting in opposite directions, up to ~8 laps a second |
 | Horror | Fluorescent tubes malfunctioning over a dim pulsing background; both colors yours |
+| Candy cane | Red and white bands gliding slowly around the ring |
 | Pomodoro | 25/5 cycles with a long break every fourth; unmissable phase changes |
 | Metronome | 4/4 playhead with the beats on the corners; tempo from the page or HA |
 
